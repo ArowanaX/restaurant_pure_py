@@ -1,9 +1,6 @@
-# from models import CustomerUser
 import uuid
 import sqlite3
 from db import get_main_menu, get_drinks_menu, get_deserts_menu
-from db import price_main, price_drinks, price_deserts
-# from db import seek_main_menu
 import settings
 
 
@@ -106,32 +103,53 @@ def login(username, password):
 
             main_menu = get_main_menu()
             print('sefaresh dahid')
-            print(main_menu)
+            for row in main_menu:
+                print("id: ", row[0])
+                print("name: ", row[1])
+                print("details: ", row[2])
+                print("price: ", row[3])
+                print('-------------------------------')
             pick = input('ghazaye khod ra entekhab konid: ')
-            # print(main_menu.gheymat)
             while pick != 'n':
-                order.append(pick)
-                prices.append(price_main)
+                pick=int(pick)
+                order.append(main_menu[pick-1][1])
+                
+                prices.append(main_menu[pick-1][3])
+
                 pick = input('ghazaye khod ra entekhab konid: ')
 
 #-------------------------- order drinks -----------------------------------
             
             drinks_menu = get_drinks_menu()
+            for row in drinks_menu:
+                print("id: ", row[0])
+                print("name: ", row[1])
+                print("details: ", row[2])
+                print("price: ", row[3])
+                print('-------------------------------')
             pick_drink = input('noshidani chi mikhay? ')
 
             while pick_drink != 'n':
-                order.append(pick_drink)
-                prices.append(price_drinks)
+                pick_drink=int(pick_drink)
+                order.append(drinks_menu[pick_drink-1][1])
+                prices.append(drinks_menu[pick_drink-1][3])
                 pick_drink = input('noshidani chi mikhay? ')
 
  # ----------------------- order deserts ------------------------------------               
 
             desert_menu = get_deserts_menu()
+            for row in desert_menu:
+                print("id: ", row[0])
+                print("name: ", row[1])
+                print("details: ", row[2])
+                print("price: ", row[3])
+                print('-------------------------------')
             pick_desert = input('deser chi mikhay? ')
 
             while pick_desert != 'n':
-                order.append(pick_desert)
-                prices.append(price_deserts)
+                pick_desert=int(pick_desert)
+                order.append(desert_menu[pick_desert-1][1])
+                prices.append(desert_menu[pick_desert-1][3])
                 pick_desert = input('deser chi mikhay? ')
 
             print('-' * 10)
